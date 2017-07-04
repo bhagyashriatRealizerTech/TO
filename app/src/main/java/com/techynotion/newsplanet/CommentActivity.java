@@ -119,7 +119,7 @@ public class CommentActivity extends AppCompatActivity implements OnTaskComplete
                     JSONObject jobj = jsonArray.getJSONObject(i);
                     commentModel.setUsername(jobj.getString("CommentByUserName"));
                     commentModel.setComment(jobj.getString("CommentText"));
-                    commentModel.setProfile(jobj.getString("CommentbyThumbnailUrl"));
+                    commentModel.setProfile(jobj.getString("CommentByThumbnailUrl"));
                     commentModel.setTimeStamp(jobj.getString("TimeStamp"));
 
                     commentList.add(commentModel);

@@ -295,7 +295,7 @@ public class DrawerActivity extends AppCompatActivity
             SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(DrawerActivity.this);
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "Download MahaEarth from PlayStore to get Updated News.\n"+sharedpreferences.getString("AppLink",""));
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Download TalkOut from PlayStore to get Updated News.\n"+sharedpreferences.getString("AppLink",""));
             sendIntent.setType("text/plain");
             startActivity(sendIntent);
 

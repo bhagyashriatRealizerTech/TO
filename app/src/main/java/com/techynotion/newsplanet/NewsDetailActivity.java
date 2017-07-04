@@ -334,7 +334,7 @@ public class NewsDetailActivity extends AppCompatActivity implements ObservableS
                 SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(NewsDetailActivity.this);
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, heading.getText().toString() + "\n To View this News, Please Download App from Play Store:\n"+sharedpreferences.getString("AppLink",""));
+                sendIntent.putExtra(Intent.EXTRA_TEXT, heading.getText().toString() + "\n To View this News, Please Download TalkOut from Play Store:\n"+sharedpreferences.getString("AppLink",""));
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
             }
