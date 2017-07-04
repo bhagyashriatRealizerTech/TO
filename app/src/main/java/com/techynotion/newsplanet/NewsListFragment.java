@@ -217,7 +217,7 @@ public class NewsListFragment extends Fragment implements OnTaskCompletedDb,OnTa
             lisview.setVisibility(View.GONE);
         }
         SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        String version = sharedpreferences.getString("AppVersion","");
+        String version = sharedpreferences.getString("Version","");
         String appversion = BuildConfig.VERSION_NAME;
 
             if(appversion.equalsIgnoreCase(version)){
@@ -225,8 +225,8 @@ public class NewsListFragment extends Fragment implements OnTaskCompletedDb,OnTa
             }
             else  {
 
-                Utils.updateAlertDialog(getActivity(),"MahaEarth Update",
-                        "In order to continue, you must update MahaEarth now.This should only take a few moments.");
+                Utils.updateAlertDialog(getActivity(),"TalkOut Update",
+                        "In order to continue, please update TalkOut now.\nThis will take only few moments.");
             }
     }
 
@@ -249,7 +249,8 @@ public class NewsListFragment extends Fragment implements OnTaskCompletedDb,OnTa
              SharedPreferences.Editor edit = sharedpreferences.edit();
              String version = null;
             try {
-                JSONArray rootArr = new JSONArray(s);
+                JSONObject rootObj = new JSONObject(s);
+                JSONArray rootArr = rootObj.getJSONArray("NewsList");
                 for(int i=0;i<rootArr.length();i++){
                     JSONObject obj = rootArr.getJSONObject(i);
                     NewsListModel newsListModel = new NewsListModel();
@@ -266,8 +267,9 @@ public class NewsListFragment extends Fragment implements OnTaskCompletedDb,OnTa
                     newsListModel.setSelfDisLike(obj.getBoolean("selfDisLike"));
 
                     db.insertNews(newsListModel);
-                    version = obj.getString("AppLink");
                 }
+
+                version = rootObj.getString("AppVersion");
                 String appLink = "https://play.google.com/store/apps/details?id=" + getActivity().getPackageName()+"&hl=en";
 
                 if(version != null)

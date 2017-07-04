@@ -464,11 +464,13 @@ public class LoginActivity extends AppCompatActivity implements OnTaskCompleted 
 
 
         } else if (object.getTitle().equalsIgnoreCase("Newslist")) {
-
+            SharedPreferences sharedpreferences = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+            SharedPreferences.Editor edit = sharedpreferences.edit();
             db.deleteAllData();
 
             try {
-                JSONArray rootArr = new JSONArray(s);
+                JSONObject rootObj = new JSONObject(s);
+                JSONArray rootArr = rootObj.getJSONArray("NewsList");
                 for (int i = 0; i < rootArr.length(); i++) {
                     JSONObject obj = rootArr.getJSONObject(i);
                     NewsListModel newsListModel = new NewsListModel();
@@ -487,6 +489,13 @@ public class LoginActivity extends AppCompatActivity implements OnTaskCompleted 
                     db.insertNews(newsListModel);
 
                 }
+                String  version = rootObj.getString("AppVersion");
+                String appLink = "https://play.google.com/store/apps/details?id=" + getPackageName()+"&hl=en";
+
+                if(version != null)
+                edit.putString("Version",version);
+                edit.putString("Link",appLink);
+                edit.apply();
 
                 String token = FirebaseInstanceId.getInstance().getToken();
                 FirebaseMessaging.getInstance().subscribeToTopic("NewsApp");
