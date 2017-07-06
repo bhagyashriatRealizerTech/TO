@@ -220,6 +220,9 @@ public class LoginActivity extends AppCompatActivity implements OnTaskCompleted 
         else {
             Utils.alertDialog(LoginActivity.this,"Network Error","You are not connected to internet");
         }
+
+
+
     }
 
     public void signUp(){
