@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements OnTaskCompleted 
                                         try {
                                              email = object.getString("email");
                                              name = object.getString("name");
-                                            bday ="05/09/1990";
+                                                        bday ="05/09/1990";
                                             fromWhere = "fb";
                                             LoginManager.getInstance().logOut();
                                             login(email,"newsapp");

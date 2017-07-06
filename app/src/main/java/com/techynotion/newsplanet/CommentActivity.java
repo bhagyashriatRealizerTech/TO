@@ -4,7 +4,9 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,8 +48,10 @@ public class CommentActivity extends AppCompatActivity implements OnTaskComplete
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comment_layout);
 
-        getSupportActionBar().setTitle(Utils.actionBarTitle("Comments", CommentActivity.this));
-        getSupportActionBar().show();
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(Utils.actionBarTitle("Comments", CommentActivity.this));
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.show();
 
         coment = (EditText) findViewById(R.id.edtcomnt);
         send = (TextView) findViewById(R.id.btnSendText);
@@ -60,6 +64,18 @@ public class CommentActivity extends AppCompatActivity implements OnTaskComplete
         newsDetailAsyncTaskGet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
         initiateView();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void initiateView(){
